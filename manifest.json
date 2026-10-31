@@ -1,0 +1,36 @@
+{
+  "name": "MotoRoutes Greece - Διαδρομές Μοτοσυκλέτας",
+  "short_name": "MotoRoutes",
+  "description": "Χάρτης μοτο-διαδρομών στην Ελλάδα, αρχεία GPX και live GPS tracking.",
+  "lang": "el",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "id": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "prefer_related_applications": false,
+  "background_color": "#020617",
+  "theme_color": "#020617",
+  "categories": ["travel", "navigation", "sports"],
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

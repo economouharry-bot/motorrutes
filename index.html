@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>MotoRoutes Greece - Διαδρομές Μοτοσυκλέτας & Αρχεία GPX</title>
+
+  <meta name="description" content="Χάρτης με τις καλύτερες μοτο-διαδρομές στην Ελλάδα. Κατέβασε δωρεάν αρχεία GPX, καταγράψε τη βόλτα σου με GPS και οδήγησε παρέα με live group tracking.">
+  <meta name="theme-color" content="#020617">
+  <meta name="color-scheme" content="dark">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="MotoRoutes Greece">
+  <meta property="og:locale" content="el_GR">
+  <meta property="og:title" content="MotoRoutes Greece - Διαδρομές Μοτοσυκλέτας & Αρχεία GPX">
+  <meta property="og:description" content="Χάρτης με τις καλύτερες μοτο-διαδρομές στην Ελλάδα. Κατέβασε δωρεάν αρχεία GPX, καταγράψε τη βόλτα σου με GPS και οδήγησε παρέα με live group tracking.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=1200&h=630&q=80">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Ορεινή μοτο-διαδρομή στα Τζουμέρκα">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="MotoRoutes Greece - Διαδρομές Μοτοσυκλέτας & Αρχεία GPX">
+  <meta name="twitter:description" content="Χάρτης με τις καλύτερες μοτο-διαδρομές στην Ελλάδα. Δωρεάν αρχεία GPX, GPS tracking και live group rides.">
+  <meta name="twitter:image" content="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=1200&h=630&q=80">
+
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+  <link rel="manifest" href="./manifest.json">
+  <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="MotoRoutes">
+
+  <!-- Install prompt: ο Chrome δεν δίνει κουμπί στη μπάρα στο Android, οπότε το δείχνουμε εμείς. -->
+  <script>
+    (function () {
+      var KEY = 'mr-install-dismissed';
+      var DAY = 86400000;
+      var deferred = null;
+      var shown = false;
+
+      function standalone() {
+        return (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) ||
+               window.navigator.standalone === true;
+      }
+      function dismissed() {
+        try {
+          var ts = Number(localStorage.getItem(KEY) || 0);
+          return ts > 0 && (Date.now() - ts) < 7 * DAY;
+        } catch (e) { return false; }
+      }
+      function remember() {
+        try { localStorage.setItem(KEY, String(Date.now())); } catch (e) {}
+      }
+      function isIos() {
+        var ua = navigator.userAgent || '';
+        if (/iPad|iPhone|iPod/.test(ua)) return true;
+        return /Macintosh/.test(ua) && navigator.maxTouchPoints > 1;
+      }
+      function ready(fn) {
+        if (document.body) fn();
+        else document.addEventListener('DOMContentLoaded', fn);
+      }
+
+      function build(opts) {
+        if (shown || standalone()) return;
+        shown = true;
+        ready(function () {
+          if (document.getElementById('mr-install')) return;
+          var card = document.createElement('div');
+          card.id = 'mr-install';
+          card.setAttribute('role', 'dialog');
+          card.setAttribute('aria-label', 'Εγκατάσταση εφαρμογής');
+          card.style.cssText = [
+            'position:fixed', 'left:12px', 'right:12px',
+            'bottom:calc(12px + env(safe-area-inset-bottom))',
+            'max-width:460px', 'margin:0 auto', 'z-index:9999',
+            'display:flex', 'align-items:center', 'gap:12px',
+            'padding:12px 14px', 'border-radius:16px',
+            'background:#0f172a', 'border:1px solid #1e293b',
+            'box-shadow:0 12px 32px rgba(0,0,0,.55)',
+            'font-family:Inter,system-ui,-apple-system,sans-serif',
+            'color:#f8fafc'
+          ].join(';');
+
+          var icon = document.createElement('div');
+          icon.style.cssText = 'flex:0 0 auto;width:38px;height:38px;border-radius:10px;background:#020617;display:flex;align-items:center;justify-content:center;font-size:20px';
+          icon.textContent = '🏍️';
+
+          var text = document.createElement('div');
+          text.style.cssText = 'flex:1 1 auto;min-width:0;line-height:1.25';
+          var title = document.createElement('div');
+          title.style.cssText = 'font-size:14px;font-weight:700';
+          title.textContent = opts.title;
+          var sub = document.createElement('div');
+          sub.style.cssText = 'font-size:11.5px;color:#94a3b8;margin-top:2px';
+          sub.textContent = opts.subtitle;
+          text.appendChild(title);
+          text.appendChild(sub);
+
+          card.appendChild(icon);
+          card.appendChild(text);
+
+          if (opts.action) {
+            var go = document.createElement('button');
+            go.id = 'mr-install-go';
+            go.type = 'button';
+            go.textContent = opts.action;
+            go.style.cssText = 'flex:0 0 auto;padding:9px 14px;border:0;border-radius:10px;background:#f59e0b;color:#020617;font:700 13px/1 Inter,system-ui,sans-serif;cursor:pointer';
+            go.addEventListener('click', function () {
+              if (!deferred) return;
+              deferred.prompt();
+              deferred.userChoice.then(function (choice) {
+                deferred = null;
+                close(choice && choice.outcome === 'accepted' ? 30 : 3);
+              }).catch(function () { close(3); });
+            });
+            card.appendChild(go);
+          }
+
+          var x = document.createElement('button');
+          x.type = 'button';
+          x.setAttribute('aria-label', 'Κλείσιμο');
+          x.textContent = '✕';
+          x.style.cssText = 'flex:0 0 auto;width:30px;height:30px;border:0;border-radius:8px;background:transparent;color:#64748b;font-size:14px;cursor:pointer';
+          x.addEventListener('click', function () { close(7); });
+          card.appendChild(x);
+
+          document.body.appendChild(card);
+        });
+      }
+
+      function close(days) {
+        var el = document.getElementById('mr-install');
+        if (el) el.remove();
+        shown = false;
+        if (days >= 7) remember();
+        else {
+          try { localStorage.setItem(KEY, String(Date.now() - (7 - days) * DAY)); } catch (e) {}
+        }
+      }
+
+      window.addEventListener('beforeinstallprompt', function (e) {
+        e.preventDefault();
+        deferred = e;
+        if (dismissed()) return;
+        build({ title: 'Εγκατάσταση MotoRoutes', subtitle: 'Γρήγορη πρόσβαση από την αρχική οθόνη', action: 'Εγκατάσταση' });
+      });
+
+      window.addEventListener('appinstalled', function () {
+        deferred = null;
+        var el = document.getElementById('mr-install');
+        if (el) el.remove();
+        try { localStorage.removeItem('mr-install-dismissed'); } catch (e) {}
+      });
+
+      /* iOS: δεν υπάρχει beforeinstallprompt — δείχνουμε οδηγίες μία φορά. */
+      if (isIos() && !standalone() && !dismissed()) {
+        ready(function () {
+          build({ title: 'Προσθήκη στην αρχική οθόνη', subtitle: 'Κοινοποίηση ⬆️ → «Προσθήκη στην αρχική οθόνη»', action: null });
+        });
+      }
+    })();
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <script type="module" crossorigin src="./assets/index-Dx58hS3X.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/react-SIwY82C9.js">
+  <link rel="modulepreload" crossorigin href="./assets/firebase-jeiJjIme.js">
+  <link rel="modulepreload" crossorigin href="./assets/leaflet-BSbcx_7H.js">
+  <link rel="stylesheet" crossorigin href="./assets/index-CaFPSjYW.css">
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen antialiased overflow-x-hidden">
+  <div id="root"></div>
+  <noscript>
+    <div style="font-family: Inter, system-ui, sans-serif; padding: 2rem; text-align: center;">
+      <h1 style="font-size: 1.25rem;">MotoRoutes Greece</h1>
+      <p style="color: #94a3b8;">Χρειάζεται JavaScript για να λειτουργήσει ο χάρτης και το GPS tracking.</p>
+    </div>
+  </noscript>
+  <script>
+    // Ο SW δηλώνεται αμέσως (όχι στο 'load'): στο Android το Chrome αξιολογεί
+    // την εγκαταστάσιμότητα νωρίς και το βαρύ firebase chunk καθυστερεί το 'load'.
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js').catch(function () {});
+    }
+  </script>
+</body>
+</html>
