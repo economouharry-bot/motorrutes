@@ -23,6 +23,8 @@
   <meta name="twitter:description" content="Χάρτης με τις καλύτερες μοτο-διαδρομές στην Ελλάδα. Δωρεάν αρχεία GPX, GPS tracking και live group rides.">
   <meta name="twitter:image" content="https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?auto=format&fit=crop&w=1200&h=630&q=80">
 
+  <link rel="icon" href="./favicon.ico" sizes="48x48">
+  <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png">
   <link rel="icon" type="image/svg+xml" href="./favicon.svg">
   <link rel="manifest" href="./manifest.json">
   <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
@@ -72,7 +74,7 @@
           card.setAttribute('aria-label', 'Εγκατάσταση εφαρμογής');
           card.style.cssText = [
             'position:fixed', 'left:12px', 'right:12px',
-            'bottom:calc(12px + env(safe-area-inset-bottom))',
+            'bottom:calc(' + (window.innerWidth < 640 ? 84 : 12) + 'px + env(safe-area-inset-bottom))', // πάνω από τη μπάρα καρτελών στα κινητά
             'max-width:460px', 'margin:0 auto', 'z-index:9999',
             'display:flex', 'align-items:center', 'gap:12px',
             'padding:12px 14px', 'border-radius:16px',
@@ -166,11 +168,11 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
-  <script type="module" crossorigin src="./assets/index-Dx58hS3X.js"></script>
+  <script type="module" crossorigin src="./assets/index-BaG2Mv5y.js"></script>
   <link rel="modulepreload" crossorigin href="./assets/react-SIwY82C9.js">
   <link rel="modulepreload" crossorigin href="./assets/firebase-jeiJjIme.js">
   <link rel="modulepreload" crossorigin href="./assets/leaflet-BSbcx_7H.js">
-  <link rel="stylesheet" crossorigin href="./assets/index-CaFPSjYW.css">
+  <link rel="stylesheet" crossorigin href="./assets/index-cSIqzP80.css">
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen antialiased overflow-x-hidden">
   <div id="root"></div>
