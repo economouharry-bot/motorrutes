@@ -11,7 +11,7 @@
  *   - manifest    -> stale-while-revalidate
  */
 
-const CACHE = 'moto-shell-v2';
+const CACHE = 'moto-shell-v3';
 
 /* ΣΗΜΕΙΩΣΗ: το ./index.html ΔΕΝ μπαίνει εδώ. Το Cloudflare μπορεί να κάνει redirect /index.html -> /,
    και ένα redirected response δεν επιτρέπεται να σερβιριστεί σε navigation. Το index.html
